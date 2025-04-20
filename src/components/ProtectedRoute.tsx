@@ -6,10 +6,9 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const isAuthenticated = !!localStorage.getItem("adminToken"); // Check if token exists
+  const token = localStorage.getItem("adminToken");
 
-  // If the user is authenticated, render the protected route, otherwise redirect to login
-  return isAuthenticated ? element : <Navigate to="/AdminLogin" replace />;
+  return token ? element : <Navigate to="/AdminLogin" replace />;
 };
 
 export default ProtectedRoute;

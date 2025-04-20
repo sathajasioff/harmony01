@@ -3,15 +3,36 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "@/components/Navbar";
 import { FaUsers, FaEnvelope, FaBuilding, FaRoute, FaChartLine, FaHome, FaAddressBook, FaCodeBranch, FaCalendarAlt, FaSignOutAlt, FaCog } from "react-icons/fa";
+interface Contact {
+  _id: string;
+  name: string;
+  subject: string;
+  createdAt: string;
+}
+
+interface Branch {
+  _id: string;
+  name: string;
+  district: string;
+  manager: string;
+}
+
+interface Root {
+  _id: string;
+  name: string;
+  district: string;
+  managerName: string;
+}
 
 interface DashboardStats {
   contactCount: number;
   branchCount: number;
   rootCount: number;
-  recentContacts: any[];
-  recentBranches: any[];
-  recentRoots: any[];
+  recentContacts: Contact[];
+  recentBranches: Branch[];
+  recentRoots: Root[];
 }
+
 
 const Admin = () => {
   const location = useLocation();

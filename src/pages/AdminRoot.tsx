@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaBuilding, FaMapMarkerAlt, FaPhone, FaUser, FaClock, FaEdit, FaTrash, FaHome, FaAddressBook, FaCodeBranch, FaRoute, FaCalendarAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaBuilding, FaMapMarkerAlt, FaPhone, FaUser, FaClock, FaEdit, FaTrash, FaHome, FaAddressBook, FaCog,FaCodeBranch, FaRoute, FaCalendarAlt, FaSignOutAlt } from 'react-icons/fa';
 
 interface Root {
   _id: string;
@@ -126,6 +126,17 @@ const AdminRoot = () => {
               <FaCalendarAlt className="mr-3" />
               Event Management
             </Link>
+            <Link 
+                          to="/Admin/adminsettings" 
+                          className={`flex items-center px-4 py-3 rounded-lg transition-all ${
+                            location.pathname === "/Admin/adminsettings" 
+                              ? "bg-blue-600 text-white" 
+                              : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                          }`}
+                        >
+                          <FaCog className="mr-3" />
+                          Settings
+                        </Link>
           </nav>
 
           {/* Logout Button */}
