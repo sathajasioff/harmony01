@@ -6,12 +6,9 @@ interface PublicRouteProps {
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ element }) => {
-  const isAuthenticated = !!localStorage.getItem("adminToken"); // Check if already logged in
+  const token = localStorage.getItem("adminToken");
 
-  // If authenticated, redirect to Admin panel, otherwise show the login page
-  return isAuthenticated ? <Navigate to="/Admin/Admin" replace /> : element;
+  return token ? <Navigate to="/Admin/Admin" replace /> : element;
 };
 
 export default PublicRoute;
-// admin1@example.com
-// Admin12345

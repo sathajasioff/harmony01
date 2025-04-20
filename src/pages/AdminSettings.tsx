@@ -109,7 +109,7 @@ const AdminSettings = () => {
     localStorage.setItem('darkMode', settings.darkMode.toString());
   }, [settings.darkMode]);
 
-  const handleSettingChange = (setting: string, value: any) => {
+  const handleSettingChange = (setting: string, value: string | number | boolean) => {
     setSettings(prev => ({
       ...prev,
       [setting]: value
@@ -189,8 +189,6 @@ const AdminSettings = () => {
           <div className="border-b dark:border-gray-700 pb-6">
             <h2 className="text-xl font-semibold mb-4 dark:text-white">Notification Settings</h2>
             <div className="space-y-4">
-              <SettingToggle label="Enable Notifications" description="Receive notifications for important updates" checked={settings.notifications} onChange={(v) => handleSettingChange('notifications', v)} />
-              <SettingToggle label="Email Notifications" description="Receive email notifications" checked={settings.emailNotifications} onChange={(v) => handleSettingChange('emailNotifications', v)} />
               <SettingToggle label="Dark Mode" description="Enable dark theme for the admin panel" checked={settings.darkMode} onChange={(v) => handleSettingChange('darkMode', v)} />
             </div>
           </div>
