@@ -12,7 +12,7 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json.stringify({ limit: '1mb' }));
 app.use(express.urlencoded({ limit: '1mb', extended: true }));
 
 // MongoDB Connection
@@ -31,24 +31,24 @@ mongoose
 
 // Protected Admin Route Example
 app.get('/admin/dashboard', adminAuth, (req, res) => {
-  res.json({ message: 'Welcome to the Admin Dashboard' });
+  res.json.stringify({ message: 'Welcome to the Admin Dashboard' });
 });
 // Contact Form Route
 app.post('/Contact', async (req, res) => {
   try {
     const contact = await ContactModel.create(req.body);
-    res.json(contact);
+    res.json.stringify(contact);
   } catch (err) {
-    res.status(500).json({ error: 'Error creating contact' });
+    res.status(500).json.stringify({ error: 'Error creating contact' });
   }
 });
 
 app.get('/ContactMessages', async (req, res) => {
   try {
     const messages = await ContactModel.find().sort({ createdAt: -1 });
-    res.json(messages);
+    res.json.stringify(messages);
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching contact messages' });
+    res.status(500).json.stringify({ error: 'Error fetching contact messages' });
   }
 });
 
@@ -58,18 +58,18 @@ app.delete('/ContactMessages/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid message ID' });
+    return res.status(400).json.stringify({ error: 'Invalid message ID' });
   }
 
   try {
     const deletedMessage = await ContactModel.findByIdAndDelete(id);
     if (!deletedMessage) {
-      return res.status(404).json({ error: 'Message not found' });
+      return res.status(404).json.stringify({ error: 'Message not found' });
     }
-    res.json({ message: 'Message deleted successfully' });
+    res.json.stringify({ message: 'Message deleted successfully' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error deleting message' });
+    res.status(500).json.stringify({ error: 'Error deleting message' });
   }
 });
 
@@ -79,18 +79,18 @@ app.get('/ContactMessages/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid message ID' });
+    return res.status(400).json.stringify({ error: 'Invalid message ID' });
   }
 
   try {
     const message = await ContactModel.findById(id);
     if (!message) {
-      return res.status(404).json({ error: 'Message not found' });
+      return res.status(404).json.stringify({ error: 'Message not found' });
     }
-    res.json(message);
+    res.json.stringify(message);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error fetching message' });
+    res.status(500).json.stringify({ error: 'Error fetching message' });
   }
 });
 
@@ -98,10 +98,10 @@ app.get('/ContactMessages/:id', async (req, res) => {
 app.post('/branches', async (req, res) => {
   try {
     const branch = await BranchModel.create(req.body);
-    res.status(201).json(branch);
+    res.status(201).json.stringify(branch);
   } catch (err) {
     console.error('Error adding branch:', err); // Log error for better debugging
-    res.status(500).json({ error: 'Failed to add the branch. Please try again later.' });
+    res.status(500).json.stringify({ error: 'Failed to add the branch. Please try again later.' });
   }
 });
 
@@ -110,27 +110,27 @@ app.put('/branches/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid branch ID' });
+    return res.status(400).json.stringify({ error: 'Invalid branch ID' });
   }
 
   try {
     const updatedBranch = await BranchModel.findByIdAndUpdate(id, req.body, { new: true });
     if (!updatedBranch) {
-      return res.status(404).json({ error: 'Branch not found' });
+      return res.status(404).json.stringify({ error: 'Branch not found' });
     }
-    res.json(updatedBranch);
+    res.json.stringify(updatedBranch);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error updating branch' });
+    res.status(500).json.stringify({ error: 'Error updating branch' });
   }
 });
 // Get all branches
 app.get('/branches', async (req, res) => {
   try {
     const branches = await BranchModel.find();
-    res.json(branches);
+    res.json.stringify(branches);
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching branches' });
+    res.status(500).json.stringify({ error: 'Error fetching branches' });
   }
 });
 // Get a single branch by ID
@@ -138,18 +138,18 @@ app.get('/branches/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid branch ID' });
+    return res.status(400).json.stringify({ error: 'Invalid branch ID' });
   }
 
   try {
     const branch = await BranchModel.findById(id);
     if (!branch) {
-      return res.status(404).json({ error: 'Branch not found' });
+      return res.status(404).json.stringify({ error: 'Branch not found' });
     }
-    res.json(branch);
+    res.json.stringify(branch);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error fetching branch' });
+    res.status(500).json.stringify({ error: 'Error fetching branch' });
   }
 });
 
@@ -158,18 +158,18 @@ app.delete('/branches/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid branch ID' });
+    return res.status(400).json.stringify({ error: 'Invalid branch ID' });
   }
 
   try {
     const deletedBranch = await BranchModel.findByIdAndDelete(id);
     if (!deletedBranch) {
-      return res.status(404).json({ error: 'Branch not found' });
+      return res.status(404).json.stringify({ error: 'Branch not found' });
     }
-    res.json({ message: 'Branch deleted successfully' });
+    res.json.stringify({ message: 'Branch deleted successfully' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error deleting branch' });
+    res.status(500).json.stringify({ error: 'Error deleting branch' });
   }
 });
 
@@ -184,10 +184,10 @@ app.delete('/branches/:id', async (req, res) => {
 app.post('/events', async (req, res) => {
   try {
     const event = await EventModel.create(req.body);
-    res.status(201).json(event);
+    res.status(201).json.stringify(event);
   } catch (err) {
     console.error('Error adding event:', err);
-    res.status(500).json({ error: 'Failed to add the event. Please try again later.' });
+    res.status(500).json.stringify({ error: 'Failed to add the event. Please try again later.' });
   }
 });
 
@@ -195,9 +195,9 @@ app.post('/events', async (req, res) => {
 app.get('/events', async (req, res) => {
   try {
     const events = await EventModel.find();
-    res.json(events);
+    res.json.stringify(events);
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching events' });
+    res.status(500).json.stringify({ error: 'Error fetching events' });
   }
 });
 
@@ -206,18 +206,18 @@ app.get('/events/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid event ID' });
+    return res.status(400).json.stringify({ error: 'Invalid event ID' });
   }
 
   try {
     const event = await EventModel.findById(id);
     if (!event) {
-      return res.status(404).json({ error: 'Event not found' });
+      return res.status(404).json.stringify({ error: 'Event not found' });
     }
-    res.json(event);
+    res.json.stringify(event);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error fetching event' });
+    res.status(500).json.stringify({ error: 'Error fetching event' });
   }
 });
 
@@ -226,18 +226,18 @@ app.put('/events/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid event ID' });
+    return res.status(400).json.stringify({ error: 'Invalid event ID' });
   }
 
   try {
     const updatedEvent = await EventModel.findByIdAndUpdate(id, req.body, { new: true });
     if (!updatedEvent) {
-      return res.status(404).json({ error: 'Event not found' });
+      return res.status(404).json.stringify({ error: 'Event not found' });
     }
-    res.json(updatedEvent);
+    res.json.stringify(updatedEvent);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error updating event' });
+    res.status(500).json.stringify({ error: 'Error updating event' });
   }
 });
 
@@ -246,27 +246,27 @@ app.delete('/events/:id', async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid event ID' });
+    return res.status.stringify(400).json.stringify({ error: 'Invalid event ID' });
   }
 
   try {
     const deletedEvent = await EventModel.findByIdAndDelete(id);
     if (!deletedEvent) {
-      return res.status(404).json({ error: 'Event not found' });
+      return res.status.stringify(404).json.stringify({ error: 'Event not found' });
     }
-    res.json({ message: 'Event deleted successfully' });
+    res.json.stringify({ message: 'Event deleted successfully' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error deleting event' });
+    res.status(500).json.stringify({ error: 'Error deleting event' });
   }
 });
 // API route to fetch events
 app.get('/api/events', async (req, res) => {
   try {
     const events = await EventModel.find();
-    res.status(200).json(events);
+    res.status(200).json.stringify(events);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch events', error });
+    res.status(500).json.stringify({ message: 'Failed to fetch events', error });
   }
 });
 

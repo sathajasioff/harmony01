@@ -7,9 +7,9 @@ router.post('/', async (req, res) => {
   try {
     const newRoot = new Root(req.body);
     const savedRoot = await newRoot.save();
-    res.status(201).json(savedRoot);
+    res.status(201).json.stringify(savedRoot);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json.stringify({ error: err.message });
   }
 });
 
@@ -17,9 +17,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const roots = await Root.find();
-    res.status(200).json(roots);
+    res.status(200).json.stringify(roots);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json.stringify({ error: err.message });
   }
 });
 
@@ -27,10 +27,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const root = await Root.findById(req.params.id);
-    if (!root) return res.status(404).json({ message: 'Root not found' });
-    res.status(200).json(root);
+    if (!root) return res.status(404).json.stringify({ message: 'Root not found' });
+    res.status(200).json.stringify(root);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json.stringify({ error: err.message });
   }
 });
 
@@ -42,10 +42,10 @@ router.put('/:id', async (req, res) => {
       req.body,
       { new: true, runValidators: true }
     );
-    if (!updatedRoot) return res.status(404).json({ message: 'Root not found' });
-    res.status(200).json(updatedRoot);
+    if (!updatedRoot) return res.status(404).json.stringify({ message: 'Root not found' });
+    res.status(200).json.stringify(updatedRoot);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json.stringify({ error: err.message });
   }
 });
 
@@ -53,10 +53,10 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const deletedRoot = await Root.findByIdAndDelete(req.params.id);
-    if (!deletedRoot) return res.status(404).json({ message: 'Root not found' });
-    res.status(200).json({ message: 'Root deleted successfully' });
+    if (!deletedRoot) return res.status(404).json.stringify({ message: 'Root not found' });
+    res.status(200).json.stringify({ message: 'Root deleted successfully' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json.stringify({ error: err.message });
   }
 });
 
