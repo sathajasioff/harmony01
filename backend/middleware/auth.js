@@ -18,7 +18,7 @@ const adminAuth = async (req, res, next) => {
 
     // Check if the user has the 'admin' role
     if (verified.role !== 'admin') {
-      return res.status(403).json.stringify({ success: false, message: 'Unauthorized: Admin Access Required' });
+      return res.status(403).json({ success: false, message: 'Unauthorized: Admin Access Required' });
     }
 
     // Attach admin information to request object
@@ -27,12 +27,12 @@ const adminAuth = async (req, res, next) => {
   } catch (err) {
     // If there's an error during token verification
     if (err.name === 'TokenExpiredError') {
-      return res.status(401).json.stringify({ success: false, message: 'Token Expired' });
+      return res.status(401).json({ success: false, message: 'Token Expired' });
     }
     if (err.name === 'JsonWebTokenError') {
-      return res.status(401).json.stringify({ success: false, message: 'Invalid Token' });
+      return res.status(401).json({ success: false, message: 'Invalid Token' });
     }
-    res.status(401).json.stringify({ success: false, message: 'Authentication Failed' });
+    res.status(401).json({ success: false, message: 'Authentication Failed' });
   }
 };
 
