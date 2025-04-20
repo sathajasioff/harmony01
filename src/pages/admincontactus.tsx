@@ -118,8 +118,7 @@ const AdminContactUs = () => {
               <FaCalendarAlt className="mr-3" />
               Event Management
             </Link>
-            <Link 
-                          to="/Admin/adminsettings" 
+            <Link to="/Admin/adminsettings" 
                           className={`flex items-center px-4 py-3 rounded-lg transition-all ${
                             location.pathname === "/Admin/adminsettings" 
                               ? "bg-blue-600 text-white" 

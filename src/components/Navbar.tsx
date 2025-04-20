@@ -61,6 +61,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-6 mx-auto">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About Us</NavLink>
+          <NavLink to="/Adminlogin">Adminlogin</NavLink>
 
           {/* Branch Details Dropdown */}
           <div className="relative group">
