@@ -12,14 +12,14 @@ router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
     let admin = await Admin.findOne({ email });
 
-    if (admin) return res.status(400).json.stringify({ error: 'Admin already exists' });
+    if (admin) return res.status(400).json({ error: 'Admin already exists' });
 
     admin = new Admin({ email, password });
     await admin.save();
 
-    res.status(201).json.stringify({ message: 'Admin registered successfully' });
+    res.status(201).json({ message: 'Admin registered successfully' });
   } catch (err) {
-    res.status(500).json.stringify({ error: 'Error registering admin' });
+    res.status(500).json({ error: 'Error registering admin' });
   }
 });
 
@@ -29,16 +29,16 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const admin = await Admin.findOne({ email });
 
-    if (!admin) return res.status(400).json.stringify({ error: 'Invalid credentials' });
+    if (!admin) return res.status(400).json({ error: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) return res.status(400).json.stringify({ error: 'Invalid credentials' });
+    if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
     const token = jwt.sign({ id: admin._id, role: 'admin' }, 'secretKey', { expiresIn: '1d' });
 
-    res.json.stringify({ token });
+    res.json({ token });
   } catch (err) {
-    res.status(500).json.stringify({ error: 'Error logging in' });
+    res.status(500).json({ error: 'Error logging in' });
   }
 });
 
@@ -53,7 +53,7 @@ router.post('/change-password', adminAuth, async (req, res) => {
     const admin = await Admin.findById(req.admin.id);
     if (!admin) {
       console.log('Admin not found in database');
-      return res.status(404).json.stringify({ success: false, message: 'Admin not found' });
+      return res.status(404).json({ success: false, message: 'Admin not found' });
     }
 
     // Verify current password
@@ -61,7 +61,7 @@ router.post('/change-password', adminAuth, async (req, res) => {
     const isMatch = await bcrypt.compare(currentPassword, admin.password);
     if (!isMatch) {
       console.log('Current password verification failed');
-      return res.status(400).json.stringify({ success: false, message: 'Current password is incorrect' });
+      return res.status(400).json({ success: false, message: 'Current password is incorrect' });
     }
 
     // Update the password (the model's pre-save middleware will handle hashing)
@@ -74,14 +74,14 @@ router.post('/change-password', adminAuth, async (req, res) => {
     
     if (!savedAdmin) {
       console.log('Failed to save admin document');
-      return res.status(500).json.stringify({ success: false, message: 'Failed to save password changes' });
+      return res.status(500).json({ success: false, message: 'Failed to save password changes' });
     }
 
     console.log('Password successfully updated in database');
-    res.json.stringify({ success: true, message: 'Password changed successfully' });
+    res.json({ success: true, message: 'Password changed successfully' });
   } catch (err) {
     console.error('Password change error:', err);
-    res.status(500).json.stringify({ success: false, message: 'Error changing password' });
+    res.status(500).json({ success: false, message: 'Error changing password' });
   }
 });
 
