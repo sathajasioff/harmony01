@@ -59,7 +59,7 @@ const App = () => (
           <Route path="/Admin/RootAdd" element={<ProtectedRoute element={<RootAdd/>} />} />
           <Route path="/Admin/eventadd" element={<ProtectedRoute element={<Eventadd />} />} />
           <Route path="/Admin/adminsettings" element={<ProtectedRoute element={<AdminSettings />} />} />
-          
+          <Route path="/Admin/Logout" element={<Logout />} />
           <Route path="/" element={<><Navbar /><Logout /></>} />
           <Route path="/Admin/adminRegister" element={<AdminRegister/>} />
           {/* Fallback Route */}
