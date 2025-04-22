@@ -29,6 +29,7 @@ import Logout from "./pages/logout";  // Match case exactly
 import ProtectedRoute from './components/ProtectedRoute'; // Import your ProtectedRoute component
 import PublicRoute from "./components/PublicRoute";
 import AdminRegister from "./pages/AdminRegister";
+import { LogIn } from "lucide-react";
 
 
 
@@ -60,7 +61,7 @@ const App = () => (
           <Route path="/Admin/eventadd" element={<ProtectedRoute element={<Eventadd />} />} />
           <Route path="/Admin/adminsettings" element={<ProtectedRoute element={<AdminSettings />} />} />
           <Route path="/Admin/Logout" element={<Logout />} />
-          <Route path="/" element={<><Navbar /><Logout /></>} />
+          <Route path="/" element={<><Navbar /><LogIn /></>} />
           <Route path="/Admin/adminRegister" element={<AdminRegister/>} />
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
