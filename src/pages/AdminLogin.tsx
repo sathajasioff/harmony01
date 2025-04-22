@@ -140,6 +140,17 @@ const AdminLogin: React.FC = () => {
             </div>
            
           </div>
+          <div className="text-center mt-4">
+  <p className="text-sm text-gray-600">
+    Don't have an account?{" "}
+    <span
+      onClick={() => navigate("/admin/adminRegister")}
+      className="text-blue-600 hover:underline cursor-pointer"
+    >
+      Register here
+    </span>
+  </p>
+</div>
 
           <button
             type="submit"
