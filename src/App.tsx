@@ -28,6 +28,11 @@ import NotFound from "./pages/NotFound";
 import Logout from "./pages/logout";  // Match case exactly
 import ProtectedRoute from './components/ProtectedRoute'; // Import your ProtectedRoute component
 import PublicRoute from "./components/PublicRoute";
+import AdminRegister from "./pages/AdminRegister";
+
+
+
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -55,7 +60,7 @@ const App = () => (
           <Route path="/Admin/eventadd" element={<ProtectedRoute element={<Eventadd />} />} />
           <Route path="/Admin/adminsettings" element={<ProtectedRoute element={<AdminSettings />} />} />
           <Route path="/Admin/Logout" element={<Logout />} />
-      
+          <Route path="/Admin/adminRegister" element={<AdminRegister/>} />
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -22,6 +22,12 @@ router.post('/signup', async (req, res) => {
     res.status(500).json({ error: 'Error registering admin' });
   }
 });
+// Check if an admin exists
+router.get('/exists', async (req, res) => {
+  const existingAdmin = await Admin.findOne();
+  res.json({ exists: !!existingAdmin });
+});
+
 
 // Admin Login
 router.post('/login', async (req, res) => {
